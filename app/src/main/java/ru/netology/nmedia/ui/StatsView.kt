@@ -1,6 +1,7 @@
 package ru.netology.nmedia.ui
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -8,12 +9,15 @@ import android.graphics.PointF
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import androidx.core.content.withStyledAttributes
 import ru.netology.nmedia.R
 import ru.netology.nmedia.util.AndroidUtils
 import kotlin.math.min
 import kotlin.random.Random
+
 
 class StatsView @JvmOverloads constructor(
     context: Context,
@@ -68,6 +72,7 @@ class StatsView @JvmOverloads constructor(
         )
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         if (data.isEmpty()) {
             return
@@ -79,7 +84,22 @@ class StatsView @JvmOverloads constructor(
             paint.color = colors.getOrNull(index) ?: randomColor()
             canvas.drawArc(oval, startFrom, angle * progress, false, paint)
             startFrom += angle
+            animation = RotateAnimation(0f, 360f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+            animation.duration = 1000
+            animation.interpolator = LinearInterpolator()
+
         }
+
+        val size = data.size/4F
+
+        canvas.drawText(
+            "%.2f%%".format(size * 100),
+            center.x,
+            center.y + textPaint.textSize / 4,
+            textPaint,
+        )
     }
 
     private fun update() {
@@ -94,11 +114,14 @@ class StatsView @JvmOverloads constructor(
                 progress = anim.animatedValue as Float
                 invalidate()
             }
-            duration = 2000
+            duration = 1000
             interpolator = LinearInterpolator()
         }.also {
             it.start()
         }
+
+
+
     }
 
     private fun randomColor() = Random.nextInt(0xFF000000.toInt(), 0xFFFFFFFF.toInt())

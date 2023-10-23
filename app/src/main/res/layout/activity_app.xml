@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center" />-->
 
     <ru.netology.nmedia.ui.StatsView
         android:id="@+id/stats"

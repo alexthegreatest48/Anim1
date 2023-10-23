@@ -28,28 +28,24 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
             0.25F,
             0.25F,
         )
-        val percent = findViewById<TextView>(R.id.percent)
-        percent.text = "%.2f%%".format(view.data.sum() * 100)
 
-
-        val label = findViewById<TextView>(R.id.label)
-       val viewAnim = AnimationUtils.loadAnimation(
-           this, R.anim.view_animation
-        ).apply {
-            setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation?) {
-                    label.text = "started"
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    label.text = "ended"
-                }
-                override fun onAnimationRepeat(animation: Animation?) {
-                    label.text = "repeat"
-                }
-            })
-        }
-       view.startAnimation(viewAnim)
+//        val label = findViewById<TextView>(R.id.label)
+//        val viewAnim = AnimationUtils.loadAnimation(
+//           this, R.anim.view_animation
+//        ).apply {
+//            setAnimationListener(object : Animation.AnimationListener {
+//                override fun onAnimationStart(animation: Animation?) {
+//                    label.text = "started"
+//                }
+//                override fun onAnimationEnd(animation: Animation?) {
+//                    label.text = "ended"
+//                }
+//                override fun onAnimationRepeat(animation: Animation?) {
+//                    label.text = "repeat"
+//                }
+//            })
+//        }
+//       view.startAnimation(viewAnim)
 
 
 // Конец примера 1
