@@ -78,18 +78,17 @@ class StatsView @JvmOverloads constructor(
             return
         }
 
-        var startFrom = -90F
+        var startFrom = -90F + 360F * progress
         for ((index, datum) in data.withIndex()) {
             val angle = 360F * datum
             paint.color = colors.getOrNull(index) ?: randomColor()
             canvas.drawArc(oval, startFrom, angle * progress, false, paint)
             startFrom += angle
-            animation = RotateAnimation(0f, 360f,
+           /* animation = RotateAnimation(0f, 360f,
                 Animation.RELATIVE_TO_SELF, 0.5f,
                 Animation.RELATIVE_TO_SELF, 0.5f);
             animation.duration = 1000
-            animation.interpolator = LinearInterpolator()
-
+            animation.interpolator = LinearInterpolator()*/
         }
 
         val size = data.size/4F
@@ -119,9 +118,6 @@ class StatsView @JvmOverloads constructor(
         }.also {
             it.start()
         }
-
-
-
     }
 
     private fun randomColor() = Random.nextInt(0xFF000000.toInt(), 0xFFFFFFFF.toInt())
